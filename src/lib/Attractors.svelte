@@ -211,7 +211,7 @@
 					break;
 				case 2: // Langford Attractor
 					pointArray = lArray.slice();
-					scale = 2.4;
+					scale = 1.0;
 					break;
 				default:
 					break;
