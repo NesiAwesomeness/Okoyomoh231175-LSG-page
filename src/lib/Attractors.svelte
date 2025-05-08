@@ -58,7 +58,7 @@
 
 	let oArray = new Float32Array(particleCount * 3);
 	let lorentzArray = new Float32Array(particleCount * 3);
-	let lArray = new Float32Array(particleCount * 3);
+	// let lArray = new Float32Array(particleCount * 3);
 	let colorArray = new Float32Array(particleCount * 3);
 
 	function handlePointerMove(event) {
@@ -70,7 +70,7 @@
 
 	const oPoint = new Vector3(10, 10, 10);
 	const lorentzPoint = new Vector3(10, 10, 10);
-	const lPoint = new Vector3(10, 10, 10);
+	// const lPoint = new Vector3(10, 10, 10);
 
 	// These are the ideal points of the particles.
 	// These are the actual points of the particles.
@@ -108,7 +108,7 @@
 
 		if (t > 2.0) {
 			attractorType++;
-			if (attractorType > 2) {
+			if (attractorType > 1) {
 				attractorType = 0;
 			}
 			t = 0.0;
@@ -196,7 +196,7 @@
 				for (let i = particleCount * 3 - 1; i > 2; i--) {
 					lorentzArray[i] = lorentzArray[i - 3];
 					oArray[i] = oArray[i - 3];
-					lArray[i] = lArray[i - 3];
+					// lArray[i] = lArray[i - 3];
 				}
 				tick = 0.0;
 			}
@@ -209,10 +209,10 @@
 					pointArray = oArray.slice();
 					scale = 1.8;
 					break;
-				case 2: // Langford Attractor
-					pointArray = lArray.slice();
-					scale = 1.0;
-					break;
+				// case 2: // Langford Attractor
+				// 	pointArray = lArray.slice();
+				// 	scale = 0.01;
+				// 	break;
 				default:
 					break;
 			}
@@ -238,22 +238,20 @@
 				lorentzPoint.y + lorentzDt * (lorentzPoint.x * (R - lorentzPoint.z) - lorentzPoint.y);
 			lorentzArray[2] =
 				lorentzPoint.z + lorentzDt * (lorentzPoint.x * lorentzPoint.y - B * lorentzPoint.z);
-
 			lorentzPoint.set(lorentzArray[0], lorentzArray[1], lorentzArray[2]);
 
-			const lDt = 0.02 * clampedDelta * begin;
-			const a_dadras = 3.0;
-			const b_dadras = 2.7;
-			const c_dadras = 1.7;
-			const d_dadras = 2.0;
-			const e_dadras = 9.0;
+			// const lDt = 0.02 * clampedDelta * begin;
+			// const a_dadras = 3.0;
+			// const b_dadras = 2.7;
+			// const c_dadras = 1.7;
+			// const d_dadras = 2.0;
+			// const e_dadras = 9.0;
 
-			lArray[0] =
-				lPoint.x + lDt * (lPoint.y - a_dadras * lPoint.x + b_dadras * lPoint.y * lPoint.z);
-			lArray[1] = lPoint.y + lDt * (c_dadras * lPoint.y - lPoint.x * lPoint.z + lPoint.z);
-			lArray[2] = lPoint.z + lDt * (d_dadras * lPoint.x * lPoint.y - e_dadras * lPoint.z);
-
-			lPoint.set(lArray[0], lArray[1], lArray[2]);
+			// lArray[0] =
+			// 	lPoint.x + lDt * (lPoint.y - a_dadras * lPoint.x + b_dadras * lPoint.y * lPoint.z);
+			// lArray[1] = lPoint.y + lDt * (c_dadras * lPoint.y - lPoint.x * lPoint.z + lPoint.z);
+			// lArray[2] = lPoint.z + lDt * (d_dadras * lPoint.x * lPoint.y - e_dadras * lPoint.z);
+			// lPoint.set(lArray[0], lArray[1], lArray[2]);
 		}
 
 		pointGeometry.setAttribute('position', new BufferAttribute(particleArray, 3));
